@@ -23,12 +23,14 @@ post_detail,
 post_list, 
 PostMixinListView,
 PostListView,
-PostDetailView
+PostDetailView,
+OwnerDetailView
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path('api/owner/<pk>/', OwnerDetailView.as_view(), name='owner_detail'),
     path('api/posts/', PostListView.as_view(), name='post_list'),
     path('api/posts/<pk>/', PostDetailView.as_view(), name='post_detail'),
     # path('api/posts/', PostMixinListView.as_view(), name='post_list'),

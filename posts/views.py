@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth import get_user_model
 
 from rest_framework import mixins, generics
 from rest_framework.views import APIView
@@ -16,9 +17,11 @@ from rest_framework.status import (
 
 from .models import Post
 from .permissions import IsOwnerPermission
-from .serializers import PostSerializer
+from .serializers import PostSerializer, OwnerSerializer
 
 # Create your views here.
+User = get_user_model()
+
 class PostView(APIView):
     permission_classes = (AllowAny,)
 
@@ -105,4 +108,10 @@ class PostDetailView(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated, IsOwnerPermission)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class OwnerDetailView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = OwnerSerializer
+
 
