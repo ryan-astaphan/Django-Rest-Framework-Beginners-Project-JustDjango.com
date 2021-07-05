@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 
-from rest_framework import serializers
+from rest_framework import mixins, generics
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -84,3 +84,11 @@ def post_detail(request, pk):
     elif request.method == 'DELETE':
         post.delete()
         return HttpResponse(status=204)
+
+
+class PostMixinListView(mixins.ListModelMixin, generics.GenericAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

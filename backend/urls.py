@@ -17,13 +17,14 @@ from posts.models import Post
 from django.contrib import admin
 from django.urls import path, include
 
-from posts.views import PostView, post_detail, post_list
+from posts.views import PostView, post_detail, post_list, PostMixinListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/posts/', PostView.as_view(), name='post_list'),
-    path('api/posts/<pk>/', PostView.as_view(), name='post_detail'),
+    path('api/posts/', PostMixinListView.as_view(), name='post_list'),
+    # path('api/posts/', PostView.as_view(), name='post_list'),
+    # path('api/posts/<pk>/', PostView.as_view(), name='post_detail'),
     # path('api/post-list/', post_list, name='post_list'),
     # path('api/posts/<int:pk>/', post_detail, name='post_detail'),
 ]
