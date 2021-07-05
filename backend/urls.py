@@ -13,29 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from posts.models import Post
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from posts.views import (
-PostView, 
-post_detail, 
-post_list, 
-PostMixinListView,
-PostListView,
-PostDetailView,
-OwnerDetailView
-)
+from posts.views import home
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/owner/<pk>/', OwnerDetailView.as_view(), name='owner_detail'),
-    path('api/posts/', PostListView.as_view(), name='post_list'),
-    path('api/posts/<pk>/', PostDetailView.as_view(), name='post_detail'),
-    # path('api/posts/', PostMixinListView.as_view(), name='post_list'),
-    # path('api/posts/', PostView.as_view(), name='post_list'),
-    # path('api/posts/<pk>/', PostView.as_view(), name='post_detail'),
-    # path('api/post-list/', post_list, name='post_list'),
-    # path('api/posts/<int:pk>/', post_detail, name='post_detail'),
+    path('api/posts/', include('posts.urls')),
+    path('', home, name='home')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

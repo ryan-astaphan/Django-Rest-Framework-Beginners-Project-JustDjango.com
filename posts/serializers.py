@@ -1,29 +1,21 @@
-from django.contrib.auth import get_user_model
 from django.db.models import fields
-
 from rest_framework import serializers
 from .models import Post
 
-User = get_user_model()
-
-class OwnerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = (
-            'id', 'username'
-        )
-
 
 class PostSerializer(serializers.ModelSerializer):
-    owner = serializers.HyperlinkedIdentityField(many=False, view_name='owner_detail')
+    author = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
         fields = (
+            'id',
             'title',
-            'owner',
-            'custom_id',
-            'category',
+            'content',
             'publish_date',
-            'last_updated',
-            )
+            'updated',
+            'author'
+        )
+
+    def get_author(self, obj):
+        return obj.author.user.username

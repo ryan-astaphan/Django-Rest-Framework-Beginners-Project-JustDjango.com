@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Rest Framework - Beginners site</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body> 
+    <div class="form">
+        <form id="postForm" method="POST" >
+            <input type="text" name="title" placeholder="title">
+            <input type="text" name="content" placeholder="content">
+            <input type="text" name="author" placeholder="author">
+            <button id="submitButton" type="submit">Submit</button>
+        </form>
+    </div>
+    <div id="root"></div>
+    <script src="{% static 'js/main.js' %}"></script>    
+</body>
+</html>
