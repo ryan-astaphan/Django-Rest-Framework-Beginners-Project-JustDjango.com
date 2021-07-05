@@ -10,11 +10,18 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
 <body> 
+    <h1>Django Rest Framework - My First-Ever Implementation</h1>
+    <div class="intro">
+        <p>In this project I've created an API backend and linked it to a vanilla
+        JavaScript frontend. This was the first point in my learning journey 
+        that I've encountered JavaScript. However, in the very near future
+        I will begin learning JS and React.</p>
+    </div>
     <div class="form">
         <form id="postForm" method="POST" >
-            <input type="text" name="title" placeholder="title">
-            <input type="text" name="content" placeholder="content">
-            <input type="text" name="author" placeholder="author">
+            <input type="text" id="title" placeholder="title">
+            <input type="text" id="content" placeholder="content">
+            <input type="text" id="author" placeholder="author">
             <button id="submitButton" type="submit">Submit</button>
         </form>
     </div>

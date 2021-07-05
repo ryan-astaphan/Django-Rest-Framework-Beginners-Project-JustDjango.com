@@ -3,6 +3,9 @@ form = document.querySelector('#postForm').addEventListener('submit', e => {
     const title = document.getElementById('title');
     const content = document.getElementById('content');
     const author = document.getElementById('author');
+    console.log(title);
+    console.log(content);    
+    console.log(author);
 })
 
 

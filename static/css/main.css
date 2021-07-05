@@ -12,3 +12,9 @@
 #root {
     padding: 2px 16px;
 }
+
+.intro {
+    width: 800px;
+    font-size: large;
+    padding-bottom: 5px;
+}
