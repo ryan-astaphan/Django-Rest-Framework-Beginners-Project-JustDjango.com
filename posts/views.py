@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 
 from rest_framework import mixins, generics
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.status import (
@@ -15,6 +15,7 @@ from rest_framework.status import (
 )
 
 from .models import Post
+from .permissions import IsOwnerPermission
 from .serializers import PostSerializer
 
 # Create your views here.
@@ -95,11 +96,13 @@ class PostMixinListView(mixins.ListModelMixin, generics.GenericAPIView):
 
 
 class PostListView(generics.ListAPIView):
+    permission_classes = (IsAuthenticated, )
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
 
 class PostDetailView(generics.RetrieveAPIView):
+    permission_classes = (IsAuthenticated, IsOwnerPermission)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
