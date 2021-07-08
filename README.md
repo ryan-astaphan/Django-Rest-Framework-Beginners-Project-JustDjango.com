@@ -15,3 +15,6 @@ Topics covered in this project:
   * Generics
 * Permission classes- Hyperlinking between related models
 * Routers and Viewsets
+
+
+### *Note:* In this project I followed a premium tutorial from [JustDjango.com](https://learn.justdjango.com/roadmaps/django-basic)
